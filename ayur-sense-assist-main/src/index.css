@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Health-Tech Design System */
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 180 25% 97%;
+    --foreground: 180 15% 15%;
+
+    /* Card system */
+    --card: 0 0% 100%;
+    --card-foreground: 180 15% 15%;
+    --card-border: 180 20% 90%;
+
+    /* Popover system */
+    --popover: 0 0% 100%;
+    --popover-foreground: 180 15% 15%;
+
+    /* Primary - Deep Teal */
+    --primary: 180 85% 25%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 180 85% 20%;
+    --primary-light: 180 60% 85%;
+
+    /* Secondary - Sea Green */
+    --secondary: 160 50% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 160 40% 90%;
+
+    /* Accent - Warm Terracotta */
+    --accent: 25 85% 60%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 25 65% 90%;
+
+    /* Health status colors */
+    --safe: 140 70% 45%;
+    --safe-foreground: 0 0% 100%;
+    --safe-light: 140 50% 95%;
+    
+    --danger: 0 85% 55%;
+    --danger-foreground: 0 0% 100%;
+    --danger-light: 0 60% 95%;
+
+    --warning: 45 90% 55%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 45 70% 95%;
+
+    /* Neutral system */
+    --muted: 180 20% 94%;
+    --muted-foreground: 180 10% 45%;
+    --neutral: 180 5% 85%;
+    --neutral-foreground: 180 15% 25%;
+
+    /* Interactive elements */
+    --border: 180 20% 88%;
+    --input: 180 20% 92%;
+    --ring: 180 85% 25%;
+    --focus-ring: 180 85% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 85% 25%), hsl(160 70% 35%));
+    --gradient-hero: linear-gradient(135deg, hsl(180 60% 85%), hsl(160 50% 90%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(180 25% 98%));
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 8px hsl(180 25% 15% / 0.08);
+    --shadow-medium: 0 4px 16px hsl(180 25% 15% / 0.12);
+    --shadow-strong: 0 8px 24px hsl(180 25% 15% / 0.16);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  /* Health condition cards */
+  .condition-card {
+    @apply relative overflow-hidden bg-card border border-card-border rounded-2xl p-6 cursor-pointer;
+    @apply transition-all duration-300 hover:shadow-[var(--shadow-medium)] hover:scale-[1.02];
+    background: var(--gradient-card);
+  }
+
+  .condition-card:hover {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .condition-card.selected {
+    @apply ring-2 ring-primary border-primary;
+    box-shadow: var(--shadow-strong);
+  }
+
+  /* Status indicators */
+  .status-safe {
+    @apply bg-safe text-safe-foreground;
+  }
+
+  .status-danger {
+    @apply bg-danger text-danger-foreground;
+  }
+
+  .status-warning {
+    @apply bg-warning text-warning-foreground;
+  }
+
+  /* Sensor cards */
+  .sensor-card {
+    @apply bg-card border border-card-border rounded-xl p-4;
+    @apply transition-all duration-300 hover:shadow-[var(--shadow-soft)];
+    background: var(--gradient-card);
+  }
+
+  /* Step indicators */
+  .step-indicator {
+    @apply flex items-center justify-center w-8 h-8 rounded-full;
+    @apply bg-primary-light text-primary font-semibold text-sm;
+    @apply transition-all duration-300;
+  }
+
+  .step-indicator.active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .step-indicator.completed {
+    @apply bg-safe text-safe-foreground;
+  }
+
+  /* Loading animation */
+  .pulse-dot {
+    @apply w-2 h-2 bg-primary rounded-full;
+    animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+
+  .pulse-dot:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+
+  .pulse-dot:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+
+  /* Hero background */
+  .hero-bg {
+    background: var(--gradient-hero);
+  }
+
+  /* Glassmorphism effect */
+  .glass {
+    @apply backdrop-blur-sm bg-white/80 border border-white/20;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom keyframes */
+@keyframes pulse-dot {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease-out;
+}
